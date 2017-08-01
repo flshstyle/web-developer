@@ -1,0 +1,42 @@
+@charset "utf-8";
+li{
+	width: 100px;
+	display: inline-block;
+	float: left;
+}
+
+
+.bb{
+	height: 100px;
+	width: 1000px;
+	border: 1px solid #000;
+	box-sizing:border-box;
+	position: relative;	
+	margin: 0 auto;
+}
+.b1,.b2,.b3,.b4{
+	width: 13.5px;
+	height: 13.5px;
+	background: url(../image/边框.png);
+	position: absolute;
+}
+.b1{
+	top: -1px;
+	left: -1px;
+	background-position: bottom right;
+}
+.b2{
+	top: -1px;
+	right: -1px;
+	background-position: bottom left;
+}
+.b3{
+	bottom:-1px;
+	right:-1px;
+	background-position: top left;
+}
+.b4{
+	bottom:-1px;
+	left: -1px;
+	background-position: top right;
+}

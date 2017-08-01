@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script>
+		var a=[75,78,42,46,54,13,88,71];
+		var i,j;
+		var b="";
+		for(i=0;i<a.length-1;i++){
+			for(j=0;j<a.length-1;j++)
+				if(a[j]>a[j+1]){
+					var tmp=a[j+1];
+					a[j+1]=a[j];
+					a[j]=tmp;
+					b=b+a+"\n";
+				}
+		}
+		alert(b);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>

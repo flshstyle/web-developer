@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>Document</title>
+	<style type="text/css"></style>
+<script>
+function myFunction()
+{
+x=document.getElementById("demo");  // 找到元素
+var a=object("JavaScript 能改变 HTML 元素的内容。");
+if(x==a)
+{x.innerHTML="Hello JavaScript!"; }
+else
+{x.innerHTML="JavaScript 能改变 HTML 元素的内容。";}
+   // 改变内容
+   alert(typeof x);
+}
+
+</script>
+</head>
+<body>
+<h1>我的第一段 JavaScript</h1>
+
+<p id="demo">
+JavaScript 能改变 HTML 元素的内容。
+</p>
+<button type="button" onclick="myFunction()">点击这里</button>
+</body>
+</html>

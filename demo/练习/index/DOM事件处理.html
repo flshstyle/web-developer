@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+
+</head>
+<body>
+<div id="box">
+	<input type="button" value="确定" id="btn">
+
+	<input type="button" value="确定1" id="btn1">
+	</div>
+		<script>
+		function a2(e){
+			alert(e.target.nodeName);
+			e.stopPropagation();
+		};
+		function a3(e){
+			alert('我是box');
+		};
+		var a=document.getElementById("btn");
+
+		// var b=document.getElementById("btn1");
+// //添加属性处理方法
+		// a.onclick=function(){
+		// 	alert("点击确定！");
+		// };
+// //添加删除监听器处理方法
+  //    	b.addEventListener("click", a2, false);
+  //    	b.removeEventListener("click", a2, false);
+
+//跨浏览器添加事件
+  		var eventUtil={
+  		//添加句柄
+  		addHandler:function(element,type,handler){
+  			if(element.addEventListener){
+  				element.addEventListener(type,handler,false);
+  			}
+  			else if(element.attachEvent){
+  				element.attachEvent("on"+type,handler);
+  			}
+  			else{
+  				element["on"+type]=handler;
+  			}
+  		},
+  		//删除句柄
+  		removeHandler:function(element,type,handler){
+  			if(element.removeEventListener){
+  				element.removeEventListener(type,handler,false);
+  			}
+  			else if(element.attachEvent){
+  				element.detachEvent("on"+type,handler);
+  			}
+  			else{
+  				element["on"+type]=null;
+  			}
+  		}
+  		};
+
+  		eventUtil.addHandler(a,'click',a2);
+  		var box=document.getElementById("box")
+  		eventUtil.addHandler(box,'click',a3);
+
+	</script>
+</body>
+</html>

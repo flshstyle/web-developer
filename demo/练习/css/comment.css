@@ -1,0 +1,19 @@
+/*//初级布局*/
+.main1{width:1000px; overflow: hidden;margin-bottom: 10px;}
+.main1 .left{width: 200px; float: left;}
+.main1 .right{width:800px;float: right; background-color: #eef7ff;}
+.main1 .left img{padding: 10px;margin-left: 50px;border: 2px solid #ccc}
+.main1 .right span{float: right;color: #ccc;margin:10px 10px 0 0 ;}
+.main1 .right p,h6{font-size:14px;line-height: 28px;margin:10px;} 
+/*/中级布局*/
+.main2{width:1000px; overflow: hidden;margin-bottom: 10px;}
+.main2 .right{width:800px;float: right; background-color: #eef7ff;}
+.main2  img{padding: 10px;margin-left: 50px;border: 2px solid #ccc;float: left;}
+.main2 .right span{float: right;color: #ccc;margin:10px 10px 0 0 ;}
+.main2 .right p,h6{font-size:14px;line-height: 28px;margin:10px;}
+/*高级布局*/
+.main3{width:800px; margin-left:200px;background-color: #eef7ff;float: left;}
+.main3  img{float:left;padding: 10px;margin-left: 50px;border: 2px solid #ccc;margin: 0 0 0 -148px}
+.main3  span{color: #ccc;margin:10px 10px 0 0 ;float: right;}
+.main3  p,h6{font-size:14px;line-height: 28px;margin:10px;}
+
