@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>速度动画</title>
+	<title>缓冲动画</title>
 	<style>
 	body,
 	div,
@@ -34,10 +34,10 @@
 	window.onload = function () {
 		var oDiv = document.getElementById("div1");
 		oDiv.onmouseover = function () {
-			startMove(this, 11, 0);
+			startMove(this,0);
 		};
 		oDiv.onmouseout = function () {
-			startMove(this, 13, -200);
+			startMove(this,-200);
 		};
 	}
 
@@ -46,15 +46,17 @@
 	//speed：增加或者减小的速度
 	//iTarget：left的目标值
 	var time;
-	function startMove(object, speed, iTarget) {
+	function startMove(object, iTarget) {
+
 		clearInterval(time);
 		time = setInterval(function () {
+			var speed=Math.ceil(Math.abs((iTarget-object.offsetLeft)/10));
+			console.log(speed);
 			//通过当前值与目标值的大小判断left是增加还是减小
 			if (object.offsetLeft > iTarget) {
 				//当当前值快要减小到与目标值相等时，结束计时器同时把left设为目标值
 				//目的：防止left一直减小
-				if (object.offsetLeft - speed <= iTarget) {
-					object.style.left = iTarget + "px";
+				if (object.offsetLeft  == iTarget) {
 					clearInterval(time);
 				} else {
 					object.style.left = object.offsetLeft - speed + "px";//left减小
@@ -62,8 +64,7 @@
 			} else {
 				//当当前值快要减小到与目标值相等时，结束计时器同时把left设为目标值
 				//目的：防止left一直增加
-				if (object.offsetLeft + speed >= iTarget) {
-					object.style.left = iTarget + "px";
+				if (object.offsetLeft  == iTarget) {
 					clearInterval(time);
 				} else {
 					object.style.left = object.offsetLeft + speed + "px";//left增加

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>透明度动画</title>
+</head>
+<style>
+	#div1{
+		width: 200px;
+		height:200px;
+		background: red;
+		filter: alpha(opacity:30);//支持IE8以及更早的浏览器
+		opacity: 0.3;
+	}
+</style>
+<script>
+	window.onload=function(){
+		var oDiv=document.getElementById("div1");
+		oDiv.onmouseover=function(){
+			startMove(100);
+		};
+		oDiv.onmouseout=function(){
+			startMove(30);
+		}
+	}
+	var time;
+	var alpha=30;
+	function startMove(iTarget){
+		var oDiv=document.getElementById("div1");
+		clearInterval(time);
+		time=setInterval(function(){
+			var speed;
+			if(alpha>iTarget){
+				speed=-10;
+			}else{
+				speed=10;
+			}
+			if(alpha==iTarget){
+				clearInterval(time);
+			}else{
+				alpha+=speed;
+				oDiv.style.filter = 'alpha(opacity='+alpha+')';
+				oDiv.style.opacity=alpha/100;
+			}
+		}, 30);
+	}
+</script>
+<body>
+	<div id="div1"></div>
+</body>
+</html>
