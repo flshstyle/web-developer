@@ -1,28 +1,85 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>无标题文档</title>
-<style>
-body,p,h1,h2,h3,h4,h5,h6,form,ul,ol,hr{margin: 0;padding: 0;font:14px/1.5normal,"Arial", "sans-serif", "微软雅黑", "宋体", "Tahoma";color:#666}
-ul,ol{list-style:none}
-
-.demo01{width:600px;}
-.demo01.left{width:100px;float:left}
-.demo01.right{width:500px;float:right}
-
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>动画菜单</title>
+<style type="text/css">
+* { margin: 0; padding: 0; font-size: 14px; }
+a { color: #333; text-decoration: none }
+ul{ list-style: none; }
+.nav {height: 30px; border-bottom: 5px solid #F60; margin-left:50px; width:600px;}
+.nav li { float: left; position:relative; height:30px; width:120px }
+.nav li a { display: block; height: 30px; text-align: center; line-height: 30px; width:120px; background: #efefef; margin-left: 1px; }
+.subNav{ position:absolute; top:30px; left:0; width:120px; height:0; overflow:hidden}
+.subNav li a{ background:#ddd }
+.subNav li a:hover{ background:#efefef}
 </style>
+<script>
+window.onload=function(){
+    var aLi=document.getElementsByTagName('li');
+        	for(var i=0; i<aLi.length; i++){
+        	 aLi[i].onmouseover=function(){
+                    //鼠标经过一级菜单，二级菜单动画下拉显示出来
+        	 var subNav=this.getElementsByTagName("ul")[0];
+        	 var This=subNav;
+        	 clearInterval(This.time);
+        	 if(subNav){
+        	 This.time=setInterval(function(){
+        	     subNav.style.height=subNav.offsetHeight+8+"px";
+        	     if(subNav.offsetHeight>=120){
+        	        
+        	         subNav.style.height="120px";
+        	         clearInterval(This.time);
+        	     }
+        	       }
+        	     ,30);
+        	 }
+		}
+        //鼠标离开菜单，二级菜单动画收缩起来。		
+		aLi[i].onmouseout=function(){
+            var subNav=this.getElementsByTagName("ul")[0];
+              	 var This=subNav;
+        	 clearInterval(This.time);
+        	 if(subNav){
+        	 This.time=setInterval(function(){
+        	     subNav.style.height=subNav.offsetHeight-8+"px";
+        	     if(subNav.offsetHeight<=0){
+        	        
+        	         subNav.style.height="0";
+        	         clearInterval(This.time);
+        	     }
+        	       }
+        	     ,30);
+        	 }
+            
+		}
+		
+		
+	}
+}
+</script>
 </head>
 <body>
-<div class="demo01">
-<div class="left">
-<img src=".../css/微博评论.css" />
-        </div>       
-        <div class="right">
-        <h6>樱桃小丸子</h6>
-      <p>奥鹏教育是由教育部高等教育司2001年12月批准立项试点，2005年4月正式批准运营的远程教育公共服务体系，为遍布全国的学员提供学历(专升本，高起专)和非学历教育咨询、报名、学习辅导、课程考试、交费等7X24小时学习支持服务400-810-6736。</p>
-<span>10分钟之前</span>
-        </div>
-    </div>
+<ul class="nav">
+    <li><a href="#">一级菜单</a>
+    	<ul class="subNav">
+        	<li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+        </ul>
+    </li>
+    <li><a href="#">一级菜单</a>
+    	<ul class="subNav">
+        	<li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+            <li><a href="#">二级菜单</a></li>
+        </ul>
+    </li>
+    <li><a href="#">一级菜单</a></li>
+    <li><a href="#">一级菜单</a></li>
+    <li><a href="#">一级菜单</a></li>
+</ul>
 </body>
 </html>
