@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>改变宽高运动</title>
+	<style>
+	ul li {
+		list-style: none;
+		width: 200px;
+		height: 100px;
+		background: yellow;
+		margin-bottom: 20px;
+		border: 10px solid red;
+		filter: alpha(opacity:30);
+		opacity:0.3;
+	}
+	</style>
+	<script>
+	window.onload = function () {
+		var Lis1 = document.getElementById("li1");
+
+		var Lis2 = document.getElementById("li2");
+		Lis1.onmouseover = function () {
+			startMove(this, "font-size", 200);
+		}
+		Lis1.onmouseout = function () {
+			startMove(this, "font-size", 12);
+		}
+		Lis2.onmouseover = function () {
+			startMove(this, "opacity", 100);
+		}
+		Lis2.onmouseout = function () {
+			startMove(this, "opacity", 30);
+		}
+	}
+	//必须值是以“px”为单位的属性或者opacity属性
+	function startMove(obj, attr, iTarget) {
+		clearInterval(obj.timer);
+		obj.timer = setInterval(function () {
+			if(attr=="opacity"){
+				var icur=Math.round(parseFloat(getStyle(obj, attr)*100));
+			}else{
+				var icur=parseInt(getStyle(obj, attr));
+			}
+			var speed = (iTarget - icur) / 8;
+			speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+			if (iTarget == icur) {
+				clearInterval(obj.timer);
+			} else {
+				if(attr=="opacity"){
+					icur+=speed;
+					obj.style[attr]=icur/100;
+					obj.style.filter="alpha(opacity:"+icur+")";
+				}else{
+					obj.style[attr] = icur+ speed + "px";					
+				}
+			}
+		}, 30);
+	}
+	//得到元素obj中属性attr的值(兼容性写法)
+	function getStyle(obj, attr) {
+		if (obj.currentStyle) {
+			return obj.currentStyle[attr]; //针对IE
+		} else {
+			return getComputedStyle(obj, false)[attr]; //针对火狐
+		}
+	}
+	</script>
+</head>
+
+<body>
+	<ul>
+		<li id="li1">nihao</li>
+		<li id="li2"></li>
+
+	</ul>
+</body>
+
+</html>

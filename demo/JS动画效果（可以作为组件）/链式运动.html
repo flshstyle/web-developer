@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>链式运动</title>
+	<style>
+	ul li {
+		list-style: none;
+		width: 200px;
+		height: 100px;
+		background: yellow;
+		margin-bottom: 20px;
+		border: 10px solid red;
+		filter: alpha(opacity:30);
+		opacity:0.3;
+	}
+	</style>
+	<script src="JS/chainedMove.js"></script>
+	<script>
+	window.onload = function () {
+		var Lis1 = document.getElementById("li1");
+
+		var Lis2 = document.getElementById("li2");
+		Lis1.onmouseover = function () {
+			startMove(Lis1, "font-size", 200,function(){
+				startMove(Lis1,"width",400);
+			});
+		}
+		Lis1.onmouseout = function () {
+			startMove(Lis1,"width",200,function(){
+				startMove(Lis1, "font-size", 12)
+			});
+		}
+		Lis2.onmouseover = function () {
+			startMove(this, "opacity", 100);
+		}
+		Lis2.onmouseout = function () {
+			startMove(this, "opacity", 30);
+		}
+	}
+	</script>
+</head>
+
+<body>
+	<ul>
+		<li id="li1">nihao</li>
+		<li id="li2"></li>
+
+	</ul>
+</body>
+
+</html>

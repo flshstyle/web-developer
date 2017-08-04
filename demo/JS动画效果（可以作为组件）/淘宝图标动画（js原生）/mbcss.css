@@ -1,0 +1,57 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#movebox {
+	height: 400px;
+	width: 400px;
+	margin: 10px auto;
+	background: #DCDCDC;
+	border: 1px solid #000;
+}
+
+a {
+	display: block;
+	height: 70px;
+	width: 70px;
+	background: #fff;
+	float: left;
+	margin: 20px;
+	border: 1px solid #000;
+	border-radius: 10px;
+	text-align: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.lbox1,
+.lbox4 {
+	margin-left: 52px;
+}
+
+.lbox1,
+.lbox2,
+.lbox3 {
+	margin-top: 108px;
+}
+
+img {
+	position: relative;
+	top: 12px;
+}
+
+p {
+	position: relative;
+	left: -50%;
+	font-size: 14px;
+	font-family: Microsoft YaHei;
+	color: #A9A9A9;
+	font-weight: bold;
+}
+
+a div {
+	position: absolute;
+	left: 50%;
+	bottom: 7px;
+}

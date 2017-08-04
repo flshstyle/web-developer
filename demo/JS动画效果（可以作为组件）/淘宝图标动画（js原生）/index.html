@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淘宝图标</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		div{
+			width: 306px;
+			height: 200px;
+			margin: 0 auto;
+			margin-top: 100px;
+			border: 1px solid #ccc;
+		}
+		div a{
+			position: relative;
+			width: 50px;
+			height: 50px;
+			display: block;
+			margin: 25px 25px 25px 25px;
+			float:left;
+			border: 1px solid #aaa;
+			border-radius: 6px;
+			text-decoration: none;
+			line-height:50px;
+			font-size: 12px;
+			color: #ccc;
+			opacity: 1;
+			filter: alpha(opacity=100);
+			overflow: hidden;
+
+
+		}
+		div a i{
+			position: absolute;
+			top:15px;
+			left:12px;
+
+
+		}
+		div a:hover{
+			color:#f00;
+		}
+		p{
+			position: absolute;
+			top: -15px;
+			left: 12px;
+		}
+	</style>
+	<script src="../JS/ontimeMove.js"></script>
+	<script src="jquery-1.12.2.min.js"></script>
+	<script >
+	// //JS原生实现
+	// 	window.onload=function(){
+	// 		var a=document.getElementsByTagName("a");
+	// 		for(var i=0;i<a.length;i++){
+	// 			a[i].onmouseenter=function(){
+	// 				var Is=this.getElementsByTagName("i")[0];//Is不能为a[i]
+	// 				startMove(Is,{top:-20,opacity:0},function(){
+	// 					Is.style.top=30+"px";
+	// 					startMove(Is,{top:15,opacity:100});
+	// 				});
+	// 			};
+	// 		}
+	// 	}
+	//jQurey实现
+	$(function(){
+		$("a").mouseenter(function(){
+			$(this).find("i").animate({top:"-20px",opacity:"0"},300,function(){
+				$(this).css({top:"30px"});
+				$(this).animate({top:"15px",opacity:"100"},300);
+			})
+		})
+	})
+	</script>
+</head>
+<body>
+	<div>
+		<a href="#">
+			<i><img src="images/food.png" ></i>
+			<p>食物</p>
+		</a>
+		<a href="#">
+			<i><img src="images/game.png" ></i>
+			<p>游戏</p>
+		</a>
+		<a href="#">
+			<i><img src="images/insurance.png" ></i>
+			<p>保险</p>
+		</a>
+		<a href="#">
+			<i><img src="images/lottery.png" ></i>
+			<p>彩票</p>
+		</a>
+		<a href="#">
+			<i><img src="images/movie.png" ></i>
+			<p>电影</p>
+		</a>
+		<a href="#">
+			<i><img src="images/travel.png" ></i>
+			<p>旅游</p>
+		</a>
+	</div>
+</body>
+</html>
