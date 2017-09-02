@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>导入JavaScript插件</title>
+<!-- 引入Bootstrap的CSS文件 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+<!-- 站内导航 -->
+<ul class="nav nav-tabs nav-justified">
+  <li class="active"><a href="index.html">Home</a></li>
+  <li><a href="demo.html">demo.html</a></li>
+  <li><a href="自适应导航栏.html">自适应导航栏</a></li>
+  <li><a href="fixNavbar.html">固定导航条</a></li>
+  <li><a href="thumbnail.html">缩略图and列表组</a></li>
+  <li><a href="panel.html">信息面板</a></li>
+  <li><a href="支持jQuery插件.html">支持jQuery插件</a></li>
+</ul>
+
+
+
+<h4>为data-target触发弹出框增加过度动画效果</h4>
+<!-- data-target触发模态弹出窗元素 -->
+<button class="btn btn-primary" data-toggle="modal" data-target="#mymodal-data" type="button">通过data-target触发</button>
+<!-- 模态弹出窗内容 -->
+<div class="modal fade" id="mymodal-data" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+				<h4 class="modal-title">模态弹出窗标题</h4>
+			</div>
+			<div class="modal-body">
+				<p>模态弹出窗主体内容</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary">保存</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- jQuery库引用 -->
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+  $(function(){
+    $(".btn").click(function(){
+      $("#mymodal").modal("toggle");
+    });
+  });
+</script>
+</body>
+</html>

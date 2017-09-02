@@ -1,0 +1,318 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>下拉+菜单+导航a</title>
+  <!-- 引入Bootstrap的CSS文件 -->
+  <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    h4{
+      margin: 50px 0 20px 0;
+      color: red;
+      font-weight: bold;
+      display: block;
+      clear: both;
+    }
+    .panel {
+        float: left;
+        width: 200px;
+        margin: 5px;
+        margin-left: 45%;
+        margin-right: 45%;
+      }
+  </style>
+</head>
+<body>
+<!-- 站内导航 -->
+<div>
+<ul class="nav nav-tabs nav-justified">
+  <li class="active"><a href="index.html">Home</a></li>
+  <li><a href="demo.html">demo.html</a></li>
+  <li><a href="自适应导航栏.html">自适应导航栏</a></li>
+  <li><a href="fixNavbar.html">固定导航条</a></li>
+  <li><a href="thumbnail.html">缩略图and列表组</a></li>
+  <li><a href="panel.html">信息面板</a></li>
+  <li><a href="支持jQuery插件.html">支持jQuery插件</a></li>
+</ul>
+</div>
+<div class="container">
+<div class="panel panel-primary">
+    <div class="panel-heading">慕课网基础教程</div>
+    <div class="panel-body" style="overflow: hidden;">详细讲解了选择器、边框、背景、文本、颜色、盒模型、伸缩布局盒模型、多列布局、渐变、过渡、动画、媒体、响应Web设计、Web字体等主题下涵盖的所有CSS3新特性<a href="http://www.imooc.com/learn/141">http://www.imooc.com/learn/141</a></div>
+    <div class="panel-footer">作者：大漠</div>
+  </div>
+<!-- 下拉框 -->
+  <h4>下拉框</h4>
+  <div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+      下拉菜单
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="demo.html">demo.html</a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="自适应导航.html">自适应导航</a>
+      </li>
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="fixNavbar.html">固定导航条</a>
+      </li>
+      <li class="divider"></li>
+      <li role="presentation">
+        <a role="menuitem" tabindex="-1" href="#">下拉菜单项</a>
+      </li>
+    </ul>
+  </div>
+  <!-- 右对齐的下拉框 -->
+  <h4>右对齐的下拉框</h4>
+  <div class="dropdown" style="border:1px solid #ccc;float:left;clear: both;">
+    <button class="btn btn-default dropdown-toggle" type="botton" id="btn1" data-toggle="dropdown">
+      选择你喜欢的水果
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu pull-right" role="menu">
+      <li class="dropdown-header">水果</li>
+      <li class="divider"></li>
+      <li>
+        <a>苹果</a>
+      </li>
+      <li>
+        <a>香蕉</a>
+      </li>
+      <li>
+        <a>梨</a>
+      </li>
+      <li>
+        <a>桃</a>
+      </li>
+      <li class="divider"></li>
+      <li class="dropdown-header">蔬菜</li>
+      <li class="divider"></li>
+      <li>
+        <a>芹菜</a>
+      </li>
+      <li>
+        <a>萝卜</a>
+      </li>
+      <li>
+        <a>茄子</a>
+      </li>
+      <li class="divider"></li>
+      <li class="dropdown-header">主食</li>
+      <li class="divider"></li>
+      <li class="active">
+        <a>米饭</a>
+      </li>
+      <li>
+        <a>馒头</a>
+      </li>
+      <li class="disabled">
+        <a>面条</a>
+      </li>
+      <li>
+        <a>豆浆</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 按钮 -->
+  <h4><br><br><br>按钮图标</h4>
+  <div class="btn-group">
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-step-backward"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-fast-backward"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-backward"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-play"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-pause"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-stop"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-forward "></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-fast-forward"></span>
+    </button>
+    <button type="button" class="btn btn-default">
+      <span class="glyphicon glyphicon-step-forward"></span>
+    </button>
+  </div>
+  <!-- 按钮（嵌套分组） -->
+  <h4>按钮（嵌套分组）</h4>
+  <div class="btn-group">
+    <button class="btn btn-default" type="button">首页</button>
+    <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">产品展示
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="##">收割机</a>
+        </li>
+        <li>
+          <a href="##">电动机</a>
+        </li>
+        <li>
+          <a href="##">拖拉机</a>
+        </li>
+        <li>
+          <a href="##">电动车</a>
+        </li>
+      </ul>
+    </div>
+    <button class="btn btn-default" type="button">案例分析</button>
+    <button class="btn btn-default" type="button">联系我们</button>
+    <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">关于我们
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <a href="##">公司简介</a>
+        </li>
+        <li>
+          <a href="##">企业文化</a>
+        </li>
+        <li>
+          <a href="##">组织结构</a>
+        </li>
+        <li>
+          <a href="##">客服服务</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- 按钮（垂直分组） -->
+  <h4>按钮（垂直分组）</h4>
+  <div class="btn-group-vertical">
+  <button class="btn btn-default" type="button">首页</button>
+  <button class="btn btn-default" type="button">产品展示</button>
+  <button class="btn btn-default" type="button">案例分析</button>
+  <button class="btn btn-default" type="button">联系我们</button>
+  <div class="btn-group">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">关于我们<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="##">公司简介</a></li>
+      <li><a href="##">企业文化</a></li>
+      <li><a href="##">组织结构</a></li>
+      <li><a href="##">客服服务</a></li>
+    </ul>
+  </div>
+</div>
+<!-- 等分按钮 -->
+<h4>等分按钮</h4>
+<div class="btn-wrap">
+  <div class="btn-group btn-group-justified">
+    <a class="btn btn-default" href="#">首页</a>
+    <a class="btn btn-default" href="#">产品展示</a>
+    <a class="btn btn-default" href="#">案例分析</a>
+    <a href="#" class="btn btn-default">新闻中心</a>
+    <a href="#" class="btn btn-default">商务平台</a>
+    <a href="#" class="btn btn-default">服务平台</a>
+  </div>
+</div>
+<!-- 按钮下拉框 -->
+<h4>按钮下拉框</h4>
+<div class="btn-group ">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">按钮下拉菜单<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+    </ul>
+  </div>
+  <!-- 向上弹起的按钮下拉框 -->
+<h4> 向上弹起的按钮下拉框</h4>
+  <div class="btn-group dropup">
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">按钮下拉菜单<span class="caret"></span></button>
+    <ul class="dropdown-menu">
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+      <li><a href="##">按钮下拉菜单项</a></li>
+    </ul>
+  </div>
+  <!-- 导航 -->
+  <!-- 导航（标签tab） -->
+  <h4> 导航（标签tab）</h4>
+  <ul class="nav nav-tabs">
+    <li><a href="##">Home</a></li>
+  <li><a href="##">CSS3</a></li>
+  <li><a href="##">Sass</a></li>
+  <li><a href="##">jQuery</a></li>
+  <li><a href="##">Responsive</a></li>
+</ul>
+<br />
+<ul class="nav nav-tabs">
+    <li class="active"><a href="##">Home</a></li>
+  <li><a href="##">CSS3</a></li>
+  <li><a href="##">Sass</a></li>
+  <li><a href="##">jQuery</a></li>
+  <li><a href="##">Responsive</a></li>
+</ul>
+<br />
+ <ul class="nav nav-tabs">
+    <li class="active"><a href="##">Home</a></li>
+  <li><a href="##">CSS3</a></li>
+  <li><a href="##">Sass</a></li>
+  <li><a href="##">jQuery</a></li>
+  <li class="disabled"><a href="##">Responsive</a></li>
+ </ul>
+<!-- 导胶囊航 -->
+<h4>导胶囊航</h4>
+<ul class="nav nav-pills">
+  <li class="active"><a href="##">商品介绍</a></li>
+  <li><a href="##">规格参数</a></li>
+  <li><a href="##">商品评价</a></li>
+  <li class="disabled"><a href="##">售后保障</a></li>
+</ul>
+<!-- 导航（垂直堆叠的导航） -->
+<h4>导航（垂直堆叠的导航）</h4>
+<ul class="nav nav-pills nav-stacked">
+  <li class="active"><a href="##">Home</a></li>
+  <li class="active"><a href="##">商品介绍</a></li>
+  <li><a href="##">规格参数</a></li>
+  <li><a href="##">商品评价</a></li>
+  <li class="nav-divider"></li>
+  <li class="disabled"><a href="##">售后保障</a></li>
+</ul>
+<!-- 自适应导航 -->
+<h4>自适应导航</h4>
+<div>
+<ul class="nav nav-pills nav-justified">
+  <li class="active"><a href="##">Home</a></li>
+  <li class="active"><a href="##">商品介绍</a></li>
+  <li><a href="##">规格参数</a></li>
+  <li><a href="##">商品评价</a></li>
+  <li class="nav-divider"></li>
+  <li class="disabled"><a href="##">售后保障</a></li>
+</ul>
+<ul class="nav nav-tabs nav-justified">
+  <li class="active"><a href="##">Home</a></li>
+  <li><a href="##">CSS3</a></li>
+  <li><a href="##">Sass</a></li>
+  <li><a href="##">jQuery</a></li>
+  <li><a href="自适应导航栏.html">Responsive</a></li>
+</ul>
+</div>
+<br />
+</div>
+ <!-- jQuery库引用 -->
+  <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+
+</html>
