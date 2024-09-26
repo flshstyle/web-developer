@@ -1,0 +1,128 @@
+
+.main{
+	position: relative;
+	width: 640px;
+	height: 1630px;
+	margin: 0 auto;
+	background: url(../images/background.png) no-repeat;
+}
+.main img{
+	margin-top: 60px;
+	margin-left: 10px;
+}
+.main #win{
+	width: 578px;
+	height: 265px;
+	background: url(../images/win.png);
+	margin-left: 30px;
+	text-align: center;
+}
+.main #win p{
+	padding: 40px 0 0 0;
+	color:#61200e;
+	font-size: 30px;
+	font-weight: bold;
+}
+.main #win p #s1{
+	color: #f74325;
+	font-size: 100px;
+	font-weight: bolder;
+}
+.main #win p #s2{
+	color: #000;
+	font-size: 32px;
+	font-weight: bolder;
+
+}
+.main #win p #s3{
+	font-size: 26px;
+}
+.main #btn{
+	background: url(../images/按钮.png);
+	width: 255px;
+	height: 80px;
+	border: 0;
+	outline: none;
+	margin: 30px auto 14px 193px;
+	font-size: 32px;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	line-height: 80px;
+
+}
+.main #QRcode{
+	width: 540px;
+	height: 173px;
+	margin-left: 52px;
+	border-top: 1px dashed #a98065;
+	border-bottom: 1px dashed #a98065;
+}
+.main #QRcode img{
+	float: left;
+	margin: 19px 0 0 58px;
+}
+.main #QRcode p{
+	float: left;
+	padding: 43px 0 0 36px;
+	font-size: 21px;
+	font-weight: bold;
+	line-height: 34px;
+}
+.main b{
+	float: right;	
+	font-size: 24px;
+	line-height: 50px;
+	color: #c82d13;
+	margin-right: 160px;
+	margin-top: -4px;
+}
+.main #friend{
+	width: 100%;
+	height: 135px;
+	margin-top: 25px;
+	position: relative;
+}
+.main #friend #bg{
+	width: 100%;
+	height: 135px;
+	background-color: #f57622;
+	opacity: 0.2;
+}
+.main #friend .box{
+	width: 100%;
+	height: 135px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	padding-left: 53px;
+}
+.main #friend .pic{
+	float: left;
+	margin-right: 45px;
+	margin-top: 15px;
+	color: white;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 21px;
+	text-align: center;
+}
+.main #friend .pic p{
+	margin-top: 14px;
+}
+.main #friend .pic img{
+	margin: 0;
+	padding: 0;
+}
+.main #activity .top{
+	background: url(../images/活动规则.png);
+	margin: 30px 0 0 165px;
+	width: 292px;
+	height: 60px;
+}
+.main #activity p{
+	font-size: 24px;
+	line-height: 40px;
+	font-family: "Hiragino Sans GB";
+	padding: 0 30px 0 35px;
+}

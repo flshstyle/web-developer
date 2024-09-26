@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>必应搜索</title>
+	<style>
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	HTML,
+	body,
+	.main {
+		background-color: #333;
+	}
+
+	.main {
+		position: relative;
+		background: url(images/river.jpg) no-repeat;
+		height: 720px;
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.main .searchBox img {
+		float: left;
+	}
+
+	.main .searchBox form {
+		float: left;
+		background: #fff;
+		border: 0;
+		padding: 5px;
+	}
+
+	.main .searchBox {
+		position: absolute;
+		left: 30%;
+		top: 30%;
+	}
+
+	.main .searchBox form #text {
+		float: left;
+		height: 29px;
+		line-height: 29px;
+		border: 0;
+		width: 350px;
+		outline: none;
+		font-size: 18px;
+		font-weight: blod;
+	}
+
+	.main .searchBox form #submit {
+		float: left;
+		background: url(./images/search-button.png);
+		width: 29px;
+		height: 29px;
+		border: 0;
+	}
+
+	.main .searchBox img {
+		margin: -10px 10px 0 0;
+	}
+	.suggest{
+		width: 338px;
+		background-color: #fff;
+		position: absolute;
+		margin: 0;
+		padding: 0;
+		border:1px solid #999;
+	}
+	.suggest ul{
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.suggest ul li{
+		padding: 3px;
+		line-height: 25px;
+		font-size: 14px;
+		color: #777;
+		cursor:pointer;
+	}
+	.suggest ul li:hover{
+		background-color: #e5e5e5;
+		text-decoration: underline;
+	}
+	</style>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="searchBox">
+			<img src="./images/logo.png" alt="">
+			<form action="https://cn.bing.com" target="_blank">
+				<input type="text" id="text" >
+				<input type="submit" value="" id="submit">
+			</form>
+		</div>
+	</div>
+	<div class="suggest" id="search_suggest" style="display: none">
+		<ul id="search_result">
+			<li>搜索内容</li>
+			<li>搜索内容</li>
+		</ul>
+	</div>
+	 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	 <script>
+	 	// 绑定键盘输入事件
+	 	$("#text").bind("keyup",function(){
+	 		var text=$("#text").val();
+	 		// 设置ajax，请求数据，并将结果放入智能提示框中
+	 		$.get("http://api.bing.com/qsonhs.aspx?q="+text,function(d){
+	 			// 得到的结果插入提示框
+	 			var date=d.AS.Results["0"].Suggests;
+	 			var html="";
+	 			for(var i=0;i<date.length;i++){
+	 				html+="<li>"+date[i].Txt+"</li>"
+	 			}
+	 			$("#search_result").html(html);
+	 			// 以正确的位置显示智能提示框
+	 			$(".suggest").show().css({
+	 			top:$(".searchBox").find("form").offset().top+$(".searchBox").find("form").height()+10,
+	 			left:$(".searchBox").find("form").offset().left,
+	 			position:"absolute",
+	 		});	
+	 		},"json");	 		
+	 	});
+	 	// 点击页面任意一个地方，隐藏提示框
+	 	$(document).bind("click",function(){
+	 		$(".suggest").hide();
+	 	});
+	 	// 事件代理，点击提示框，跳转到相应页面
+	 	$(document).delegate("li","click",function(){
+	 		location.href="http://cn.bing.com/search?q="+$(this).text();
+	 	});
+	 </script>
+</body>
+</html>

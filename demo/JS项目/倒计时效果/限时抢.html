@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>限时抢购</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		div,img{
+		  margin:0;
+		  padding:0;
+		  border:0;
+		}
+
+
+		.content3{
+		  background:url(http://img.mukewang.com/534d13940001063d12000398.jpg) no-repeat;
+		  width:1200px;
+		  height:398px;
+		  margin:0 auto;
+		  position:relative;
+		}
+		.time{
+		  position:absolute;
+		  top:122px;
+		  left:46%;
+		  line-height:22px;
+		  font-size:14px;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			start();
+		}
+		function start(){
+			var endTime=new Date("2017/9/7,17:25:11");//设置结束时间
+			var nowTime=new Date();//获取当前时间
+			var time=parseInt((endTime.getTime()-nowTime.getTime())/1000);//结束时间与当前时间的差值
+			var d=parseInt(time/(60*60*24));//天
+			var h=parseInt(time/(60*60)%24);//小时
+			var m=parseInt(time/60%60);//分钟
+			var s=time%60;//秒
+			if(time<=0){
+				document.getElementById("LeftTime").innerHTML="抢购结束"//时间小于零时抢购结束
+				clearTimeout(t);
+			}
+			document.getElementById("LeftTime").innerHTML=d+"天"+h+"小时"+m+"分钟"+s+"秒";
+			setTimeout("start()", 500);//500毫秒结束后执行
+			// setTimeout(start, 500);
+		}
+	</script>
+</head>
+<body>
+	<div class="content3"></div>
+	<div class="time">还剩<span id="LeftTime"></span></div>
+</body>
+</html>

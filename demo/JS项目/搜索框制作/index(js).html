@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>必应搜索</title>
+	<style>
+	* {
+		margin: 0px;
+		padding: 0px;
+	}
+
+	HTML,
+	body,
+	.main {
+		background-color: #333;
+	}
+
+	.main {
+		position: relative;
+		background: url(images/river.jpg) no-repeat;
+		height: 720px;
+		width: 90%;
+		margin: 0 auto;
+	}
+
+	.main .searchBox img {
+		float: left;
+	}
+
+	.main .searchBox form {
+		float: left;
+		background: #fff;
+		border: 0;
+		padding: 5px;
+	}
+
+	.main .searchBox {
+		position: absolute;
+		left: 30%;
+		top: 30%;
+	}
+
+	.main .searchBox form #text {
+		float: left;
+		height: 29px;
+		line-height: 29px;
+		border: 0;
+		width: 350px;
+		outline: none;
+		font-size: 18px;
+		font-weight: blod;
+	}
+
+	.main .searchBox form #submit {
+		float: left;
+		background: url(./images/search-button.png);
+		width: 29px;
+		height: 29px;
+		border: 0;
+	}
+
+	.main .searchBox img {
+		margin: -10px 10px 0 0;
+	}
+	.suggest{
+		width: 338px;
+		background-color: #fff;
+		position: absolute;
+		margin: 0;
+		padding: 0;
+		border:1px solid #999;
+	}
+	.suggest ul{
+		display: block;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.suggest ul li{
+		padding: 3px;
+		line-height: 25px;
+		font-size: 14px;
+		color: #777;
+		cursor:pointer;
+	}
+	.suggest ul li:hover{
+		background-color: #e5e5e5;
+		text-decoration: underline;
+	}
+	</style>
+	<script src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="searchBox">
+			<img src="./images/logo.png" alt="">
+			<form action="https://cn.bing.com" target="_blank">
+				<input type="text" id="text" >
+				<input type="submit" value="" id="submit">
+			</form>
+		</div>
+	</div>
+	<div class="suggest" id="search_suggest" style="display: none">
+		<ul id="search_result">
+			<li>搜索内容</li>
+			<li>搜索内容</li>
+		</ul>
+	</div>
+	 <script>
+	 //通过id获得DOM，封装函数
+	 function getDOM(id){
+	 	return  document.getElementById(id);
+	 }
+	 // 绑定事件函数,浏览器兼容写法
+	 function addEvent(id,event,fn){
+	 	var dom=getDOM(id)||document;
+	 	if(dom.addEventListener){
+	 		dom.addEventListener(event,fn, false);
+	 	}else if(dom.attachEvent){
+	 		dom.attachEvent("on"+event,fn)
+	 	}
+	 }
+	 //得到元素到页面右边的值
+	 function getElementLeft(element){
+	 	// offsetLeft为其到父元素的距离
+	 	var left=element.offsetLeft;
+	 	// 判断是否有父元素，有则把其left加上去
+	 	var parent=element.offsetParent;
+	 	while(parent!==null){
+	 		left+=parent.offsetLeft;
+	 		parent=parent.offsetParent;
+	 	}
+	 	return left;
+	 }
+	 //得到元素到页面顶部的值
+	 function getElementTop(element){
+	 	// offsetLeft为其到父元素的距离
+	 	var top=element.offsetTop;
+	 	// 判断是否有父元素，有则把其top加上去
+	 	var parent=element.offsetParent;
+	 	while(parent!==null){
+	 		top+=parent.offsetTop;
+	 		parent=parent.offsetParent;
+	 	}
+	 	return top;
+	 }
+	 // 设置ajax，请求数据，并将结果放入智能提示框中
+	 // url请求服务器地址
+	 // callback回调函数
+	 function ajaxGet(url,callback){
+	 	var xhr="";
+	 	//设置请求对象
+	 	if(window.XMLHttpRequest){
+	 		xhr=new window.XMLHttpRequest();
+	 	}else if(window.ActiveXObject){
+	 		window.ActiveXObject("Msxml2.XMLHTTP");
+	 	}
+	 	// 添加状态事件，当服务器返回readyState状态改变时，触发事件
+	 	xhr.onreadystatechange=function(){
+	 		// 请求成功时，执行回调函数
+	 		if(xhr.readyState==4&&xhr.status==200){
+	 			callback(JSON.parse(xhr.responseText));// 将其转换为JS可以识别的格式
+	 		}
+	 	}
+	 	xhr.open("get",url,false);//打开与服务器连接，第三个参数设置为false才是使用ajax技术
+	 	xhr.send();//发送请求
+	 }
+	 // 绑定键盘输入事件
+	 addEvent("text","keyup",function(){
+	 	var searchText=getDOM("text").value;
+	 	ajaxGet("http://api.bing.com/qsonhs.aspx?q="+searchText,function(d){
+	 		var date=d.AS.Results["0"].Suggests;
+	 		var html="";
+	 		for(var i=0;i<date.length;i++){
+	 				html+="<li>"+date[i].Txt+"</li>"
+	 			}
+	 		getDOM("search_result").innerHTML=html;
+	 		getDOM("search_suggest").style.top=getElementTop(getDOM("text"))+35+"px";
+	 		getDOM("search_suggest").style.left=getElementLeft(getDOM("text"))-5+"px";
+	 		getDOM("search_suggest").style.position="absolute";
+	 		getDOM("search_suggest").style.display="block";
+	 	});
+	 	
+	 });
+	 // 事件代理函数，给document绑定事件，当发现用户点击元素和目标元素一致时，触发函数
+	 function delegateEvent(target,event,fn){
+	 	addEvent(document,event,function(e){
+	 		//target 属性规定哪个 DOM 元素触发了该事件，语法event.target
+	 		if(e.target.nodeName==target.toUpperCase()){
+	 			fn.call(e.target);//改变fn中this的指向，使其指向e.target的元素
+	 		}
+	 	});
+	 };
+	 // 点击页面任意一个地方，隐藏提示框,
+	 // 点击提示框，跳转到相应页面
+	 delegateEvent("li","click",function(){
+	 	var keyWord=this.innerHTML;
+	 	location.href="http://cn.bing.com/search?q="+keyWord;
+	 });
+	 </script>
+</body>
+</html>

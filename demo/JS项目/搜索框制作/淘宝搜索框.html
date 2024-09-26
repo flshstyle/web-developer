@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>淘宝搜索框</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.search-container{
+			margin: 10px;
+			position: relative;
+		}
+		body,button{
+			font: 12px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
+		}
+		@font-face{
+			font-family: iconfont;
+			src: url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.eot);
+			src: url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.eot?#iefix) format("embedded-opentype"),
+			url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.woff) format("woff"),
+			url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.tff) format("truetype"),
+			url(http://g.tbcdn.cn/tb/icon-font/1.1.5/iconfont.svg#uxiconfont) format("svg");
+
+		}
+		a{
+			text-decoration: none;
+		}
+		.search-tips{
+			float: right;
+			padding: 3px 0 0 15px;
+		}
+		.search-tips a{
+			color: #6c6c6c;
+		}
+		.search-button{
+			float: right;
+		}
+		.btn-search{
+			background-image: linear-gradient(-45deg,#ff5000,#ff6f06);
+			width: 100px;
+			height: 45px;
+			border:none;
+			color: white;
+			font-size: 18px;
+			font-weight: 700;
+			line-height: 40px;
+			cursor: pointer;
+			letter-spacing:8px;
+			text-align: center;
+		}
+		.search-common-panel{			height: 39px;
+			background-color: #f50;
+			overflow: hidden;
+			padding: 4px 0 2px 77px;
+		}
+		.search-common-panel input{
+			height: 37px;
+			line-height: 37px;
+			width: 100%;
+			border: 0 none;
+			outline: 0;
+			background-color: #fff;
+			padding: 0;
+			padding-left: 30px;
+		}
+		.iconfont{
+			font-family: iconfont;
+			font-size: 12px;
+			font-style: normal;
+			position: absolute;
+			top: 14px;
+			left: 86px;
+		}
+		.search-list{
+			position: absolute;
+			top:4px;
+			left: 3px;
+			height: 37px;
+			width: 72px;
+			background-color: white;
+			overflow: hidden;
+			border-left: 1px solid #f6f6f6;
+			border-right: 1px solid #e5e5e5;
+		}
+		.search-list ul{
+			list-style: none;
+
+		}
+		.search-list li{
+			display: none;
+			height: 37px;
+			line-height: 37px;
+			text-align: center;
+			color: #6c6c6c;
+
+		}
+		.search-list .selected{
+			background: #f6f6f6;
+			display: block;
+		}
+		.show{
+			height: auto;
+		}
+		.show li{
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<div class="search-container">
+		<div id="search-tab" class="search-list">
+			<ul>
+				<li id=tab_1 class="selected"><a href="#">宝贝</a></li>
+				<li id=tab_2><a href="#">店铺</a></li>
+			</ul>
+		</div>
+		<div class="search-pannel">
+			<form action="">
+				<div class="search-tips">
+					<a href="">
+						高级<br/>搜索
+					</a>
+				</div>
+				<div class="search-button">
+					<button class="btn-search" >搜索</button>
+				</div>
+			</form>
+			<div class="search-common-panel" >
+				<input type="text" x-webkit-speech="">
+				<i class="iconfont">ő</i>
+			</div>
+			
+		</div>
+	</div>
+	<script>
+		//通过id获得DOM，封装函数
+		function getDOM(id){
+			return  document.getElementById(id);
+		}
+		// 绑定监听事件函数,浏览器兼容写法
+		function addEvent(id,event,fn){
+			var dom=getDOM(id)||document;
+			if(dom.addEventListener){
+				dom.addEventListener(event,fn,false);
+			}else if(dom.attachEvent){
+				dom.attachEvent("on"+event,fn)
+			}
+		}
+				// 移除监听事件函数,浏览器兼容写法
+		function removeEvent(id,event,fn){
+			var dom=getDOM(id)||document;
+			if(dom.removeEventListener){
+				dom.removeEventListener(event,fn,false);
+			}else if(dom.detachEvent){
+				dom.detachEvent("on"+event,fn)
+			}
+		}
+		//得到元素obj中属性attr的值(兼容性写法)
+		function getStyle(obj, attr) {
+			if (obj.currentStyle) {
+				return obj.currentStyle[attr]; //针对IE
+			} else {
+				return getComputedStyle(obj, false)[attr]; //针对火狐
+			}
+		}
+		// 鼠标移入时展现
+		addEvent("search-tab","mouseenter",function(){
+			if(this.className.indexOf("show")<0){
+				this.className+=" show";
+			}
+			addEvent("search-tab","mouseleave",getback);
+		});
+
+		var tab=getDOM('search-tab');
+		var tab1=getDOM("tab_1");
+		// 鼠标移出时回归
+		// PS：移除事件句柄，addEventListener() 的执行函数必须使用外部函数，匿名函数，类似 "document.removeEventListener("event", function(){ myScript });" 该事件是无法移除的。
+		function getback(){
+			tab.className="search-list";
+			tab1.className="selected";
+		}
+		addEvent("search-tab","mouseleave",getback);
+		//添加事件，鼠标移入时高亮，移出时恢复
+		addEvent("tab_1","mouseenter",function(){
+			if(this.className.indexOf("selected")<0){
+				this.className+="selected";				
+			}
+		});
+
+		addEvent("tab_1","mouseleave",function(){
+			var display=getStyle(getDOM("tab_2"),"display");
+			// 判断其他元素的display属性是否为none
+			// 如果为none，表示当前元素已经被选中，显示中，则不用去除高亮和隐藏
+			if(display.indexOf("none")<0){
+				this.className="";
+			}	
+		});
+		addEvent("tab_2","mouseenter",function(){
+			if(this.className.indexOf("selected")<0){
+				this.className+="selected";	
+			}
+		});
+		addEvent("tab_2","mouseleave",function(){
+			var display=getStyle(tab1,"display");
+			// 同上
+			if(display.indexOf("none")<0){
+				this.className="";	
+			}	
+		});
+		// 添加clic事件，当鼠标点击标签时，显示选中的标签
+		addEvent("tab_1","click",function(){
+			tab.className="search-list";
+			removeEvent("search-tab","mouseleave",function(){console.log("removeEvent");});
+		});
+		addEvent("tab_2","click",function(){
+			tab.className="search-list";
+			// 移除search-tab上的mouseleave事件监听
+			// 防止移出时，设置显示回原标签
+			removeEvent("search-tab","mouseleave",getback);
+		});
+
+	</script>
+</body>
+</html>

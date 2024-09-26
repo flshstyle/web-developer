@@ -1,156 +1,224 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<!DOCTYPE html>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>动画菜单</title>
-    <style type="text/css">
-    * {
-        margin: 0;
-        padding: 0;
-        font-size: 14px;
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"/></script>
+<title>带有分散效果的瀑布流</title>
+<style type="text/css">
+   *{
+        margin:0;
+        padding:0;
     }
-
-    a {
-        color: #333;
-        text-decoration: none
-    }
-
-    ul {
-        list-style: none;
-    }
-
-    .nav {
-        height: 30px;
-        border-bottom: 5px solid #F60;
-        margin-left: 50px;
-        width: 600px;
-    }
-
-    .nav li {
-        float: left;
+    /*  CSS3*/
+    #main{
         position: relative;
-        height: 30px;
-        width: 120px
     }
+    .box{
+        padding:15px 0 0 15px;
+        float: left;
 
-    .nav li a {
-        display: block;
-        height: 30px;
-        text-align: center;
-        line-height: 30px;
-        width: 120px;
-        background: #efefef;
-        margin-left: 1px;
     }
-
-    .subNav {
-        position: absolute;
-        top: 30px;
-        left: 0;
-        width: 120px;
-        height: 0;
-        overflow: hidden
+    .pic{
+        padding:10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 6px #ccc;
+        border-radius: 10px;
     }
-
-    .subNav li a {
-        background: #ddd
+    .box img{
+        width: 162px;
+        height:auto;
     }
-
-    .subNav li a:hover {
-        background: #efefef
-    }
-    </style>
-    <script>
-    window.onload = function () {
-        var aLi = document.getElementsByTagName('li');
-        for (var i = 0; i < aLi.length; i++) {
-            aLi[i].onmouseover = function () {
-                //鼠标经过一级菜单，二级菜单动画下拉显示出来
-                var subNav = this.getElementsByTagName("ul")[0];
-                var This = subNav;
-                clearInterval(This.time);
-                if (subNav) {
-                    This.time = setInterval(function () {
-                        subNav.style.height = subNav.offsetHeight + 8 + "px";
-                        if (subNav.offsetHeight >= 120) {
-
-                            subNav.style.height = "120px";
-                            clearInterval(This.time);
-                        }
-                    }, 30);
-                }
-            }
-            //鼠标离开菜单，二级菜单动画收缩起来。        
-            aLi[i].onmouseout = function () {
-                var subNav = this.getElementsByTagName("ul")[0];
-                var This = subNav;
-                clearInterval(This.time);
-                if (subNav) {
-                    This.time = setInterval(function () {
-                        subNav.style.height = subNav.offsetHeight - 8 + "px";
-                        if (subNav.offsetHeight <= 0) {
-
-                            subNav.style.height = "0";
-                            clearInterval(This.time);
-                        }
-                    }, 30);
-                }
-
-            }
-
-
+</style>
+<script>
+// 排列瀑布布局，并渲染
+// 开头这里不能用$(document)，因为它是在页面加载时同时加载
+// 以下是加载完成后，才加载function里面的函数
+$(window).on("load",function(){
+    waterfall();
+    // json数据格式
+    var dataInt={'data':[{'src':'http://img.mukewang.com/53edadad0001efe202000070.jpg'},{'src':'http://img.mukewang.com/53edad690001260a03300130.jpg'},{'src':'http://img.mukewang.com/53edad690001260a03300130.jpg'},{'src':'http://img.mukewang.com/53edadad0001efe202000070.jpg'}]};
+    //添加onscroll事件监听
+    $(window).on("scroll",function(){
+        //当滑动到下边,加载数据
+        if(checkedScroll()){
+            //each方法遍历数组
+            $.each(dataInt.data,function(index,value){
+                var box=$("<div>").addClass("box").appendTo($("#main"));
+                var pic=$("<div>").addClass("pic").appendTo(box);
+                $("<img>").attr("src",value.src).appendTo(pic);
+            });
         }
-    }
-    </script>
+        waterfall();
+    });
+});
+// 瀑布布局函数
+function waterfall(){
+    var $boxs=$("#main>div");
+    var boxw=$boxs.eq(0).outerWidth();
+    var num=Math.floor($(window).outerWidth()/boxw);
+    $("#main").css({"width":boxw*num+"px","margin":"0 auto"});
+    var boxHarr=[];
+    $boxs.each(function(index,value){
+        if(index<num){
+            boxHarr.push($(value).outerHeight());//压入前一排box的高度，value为box元素
+        }
+        else{
+            var min=Math.min.apply(null,boxHarr);
+            var minIndex=$.inArray(min,boxHarr);
+            $(value).css({
+                            position:"absolute",
+                            "top":"200px",
+                            "left":"200px",
+                            "opacity":"1"
+                        });
+            $(value).animate({
+                            position:"absolute",
+                            "top":min+"px",
+                            "left":minIndex*boxw+"px",
+                            "opacity":"1"
+                        },2000);
+            // $(value).css({
+            //     "position":"absolute",
+            //     "top":min+"px",
+            //     "left":minIndex*boxw+"px"
+            // });
+            boxHarr[minIndex]+=$(value).outerHeight();
+        }
+    });
+}
+//判断是否滚动到最后一个box的一半，是则返回ture
+function checkedScroll(){
+    var $boxs=$("#main>div");
+    var lastbox=$boxs.last();
+    //盒子的距离顶部的位置加其高度的一半
+    var lastbox_half_h=lastbox.offset().top+Math.floor(lastbox.outerHeight()/2);
+    var Top=$(window).scrollTop()+$(window).height();//滚动高度+页面高度
+    return Top>lastbox_half_h?true:false;
+}
+</script>
 </head>
-
 <body>
-    <ul class="nav">
-        <li>
-            <a href="#">一级菜单</a>
-            <ul class="subNav">
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">一级菜单</a>
-            <ul class="subNav">
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-                <li>
-                    <a href="#">二级菜单</a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a href="#">一级菜单</a>
-        </li>
-        <li>
-            <a href="#">一级菜单</a>
-        </li>
-        <li>
-            <a href="#">一级菜单</a>
-        </li>
-    </ul>
+<div id="main">
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edadad0001efe202000070.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edadad0001efe202000070.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edadad0001efe202000070.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edadad0001efe202000070.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad54000119fb03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad690001260a03300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edad7a0001cde803300130.jpg"/>
+        </div>
+    </div>
+    <div class="box">
+        <div class="pic">
+            <img src="http://img.mukewang.com/53edacdd0001b8e804820302.jpg"/>
+        </div>
+    </div>
+</div>
 </body>
-
 </html>
